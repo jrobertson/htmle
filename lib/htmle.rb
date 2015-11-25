@@ -6,9 +6,12 @@ require 'svgle'
 
 
 
-DEFAULT_CSS = <<CSS
-
-html {background-color: white}
+DEFAULT_HTML_CSS = <<CSS
+* {
+    margin: 5 5; padding: 10 10;
+    font-size: 16; color: red;
+  }
+html {background-color: white;}
 div {background-color: green; padding: 30 10; margin: 5 5;}
 
 CSS
@@ -16,7 +19,7 @@ CSS
 class Htmle < Domle
 
   class Box < Element
-    attr2_accessor *%i(class width height)
+    attr2_accessor *%i(class width height background-color)
   end
 
   class Html < Box
@@ -33,29 +36,11 @@ class Htmle < Domle
   
   private
   
-  def fetch_style(attribute)
-    
-    h = super attribute
-    
-    %i(margin padding).each do |x|
-
-      if h.has_key? x then
-
-        a = expand_shorthand(h[x]) 
-        h[x] = ([(sym.to_s + '-')] * 4).zip.%w(top right bottom left).zip(a)
-
-      end
-
-    end
-
-    
-  end
   
   def find_add_css()
 
     # add the default CSS
-    add_css DEFAULT_CSS
-
+    add_css DEFAULT_HTML_CSS
 
     @doc.root.xpath('//style').each {|e|  add_css e.text }   
 
