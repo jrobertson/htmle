@@ -7,6 +7,7 @@ require 'svgle'
 
 
 DEFAULT_HTML_CSS = <<CSS
+
 * {
     margin: 5 5; padding: 10 10;
     font-size: 16; color: red;
@@ -19,7 +20,7 @@ CSS
 class Htmle < Domle
 
   class Box < Element
-    attr2_accessor *%i(class width height background-color)
+    attr2_accessor *%i(class width height background-color margin padding)
   end
 
   class Html < Box
