@@ -9,8 +9,8 @@ require 'svgle'
 DEFAULT_HTML_CSS = <<CSS
 
 * {
-    margin: 5 5; padding: 10 10;
-    font-size: 16; color: red;
+    margin: 0.4em; padding: 0.6em;
+    font-size: 16; color: rgb(255,0,0);
   }
 html {background-color: white;}
 div {background-color: green; padding: 30 10; margin: 5 5;}
@@ -28,12 +28,36 @@ class Htmle < Domle
   
   class Head < Box
   end
+  
+  class Title < Box
+  end
+  
+  class Style < Box
+  end  
 
   class Body < Box
-  end  
+  end
+  
+  class Strong < Box
+  end    
   
   class Div < Box
   end
+  
+  class P < Box
+  end
+  
+  class A < Box
+  end
+  
+  class Ul < Box
+  end  
+  
+  class Ol < Box
+  end
+
+  class Li < Box
+  end  
   
   private
   
@@ -41,9 +65,9 @@ class Htmle < Domle
   def find_add_css()
 
     # add the default CSS
-    add_css DEFAULT_HTML_CSS
+    add_css DEFAULT_HTML_CSS, override: false
 
-    @doc.root.xpath('//style').each {|e|  add_css e.text }   
+    @doc.root.xpath('//style').each {|e| add_css e.text }   
 
     # check for an external CSS file
     # still to-do
@@ -57,8 +81,18 @@ class Htmle < Domle
       doc: Rexle::Element,
       html: Htmle::Html,
       head: Htmle::Head,
+      title: Htmle::Title,
+      style: Htmle::Style,
       body: Htmle::Body,
-      div: Htmle::Div
+      b: Htmle::Strong,
+      strong: Htmle::Strong,
+      div: Htmle::Div,
+      p: Htmle::P,
+      a: Htmle::A,
+      ul: Htmle::Ul,
+      ol: Htmle::Ol,
+      li: Htmle::Li
+      
     }    
   end
       
