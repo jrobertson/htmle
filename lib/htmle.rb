@@ -13,7 +13,7 @@ DEFAULT_HTML_CSS = <<CSS
     font-size: 16; color: rgb(255,0,0);
   }
 html {background-color: white;}
-div {background-color: green; padding: 30 10; margin: 5 5;}
+div {background-color: black; padding: 30 10; margin: 5 5;}
 
 CSS
 
@@ -21,6 +21,10 @@ class Htmle < Domle
 
   class Box < Element
     attr2_accessor *%i(class width height background-color margin padding)
+    
+    def boundary()
+      [0,0,0,0]
+    end      
   end
 
   class Html < Box
@@ -57,7 +61,10 @@ class Htmle < Domle
   end
 
   class Li < Box
-  end  
+  end
+
+  class Input < Box
+  end
   
   private
   
@@ -91,7 +98,8 @@ class Htmle < Domle
       a: Htmle::A,
       ul: Htmle::Ul,
       ol: Htmle::Ol,
-      li: Htmle::Li
+      li: Htmle::Li,
+      input: Htmle::Input
       
     }    
   end
