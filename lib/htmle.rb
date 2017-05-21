@@ -17,7 +17,7 @@ div {background-color: black; padding: 30 10; margin: 5 5;}
 
 CSS
 
-class Htmle < Domle
+class Htmle < Svgle
 
   class Box < Element
     attr2_accessor *%i(class width height background-color margin padding)
@@ -64,27 +64,22 @@ class Htmle < Domle
   end
 
   class Input < Box
+    attr2_accessor *%i(type value)
   end
   
   private
   
   
-  def find_add_css()
+  def add_default_css()
 
-    # add the default CSS
     add_css DEFAULT_HTML_CSS, override: false
-
-    @doc.root.xpath('//style').each {|e| add_css e.text }   
-
-    # check for an external CSS file
-    # still to-do
-
+    super()
 
   end
     
   
   def defined_elements()
-    {
+    super.merge({
       doc: Rexle::Element,
       html: Htmle::Html,
       head: Htmle::Head,
@@ -101,7 +96,7 @@ class Htmle < Domle
       li: Htmle::Li,
       input: Htmle::Input
       
-    }    
+    })    
   end
       
 end
